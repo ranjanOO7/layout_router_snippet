@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store/store";
+import "./App.css";
+import Layout from "./Layout";
+import Admin from "./pages/Admin/AdminComponent";
+import Home from "./pages/Home/HomeComponent";
+import AdminFunctional from "./pages/Admin2/AdminFunctionalComponent";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <Switch>
+                        <Route path="/" exact component={Home}></Route>
+                        <Layout>
+                            <Route path="/home" component={Home}></Route>
+                            <Route path="/admin" component={Admin}></Route>
+                            <Route
+                                path="/adminFunctional"
+                                component={AdminFunctional}
+                            ></Route>
+                        </Layout>
+                    </Switch>
+                </BrowserRouter>
+            </Provider>
+        </>
+    );
 }
 
 export default App;
